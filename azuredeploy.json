@@ -17,6 +17,7 @@
         },
         "solrVersion": {
             "type": "string",
+            "defaultValue": "7.5.0",
 			"allowedValues": [
                 "6.6.1",
 				"6.6.2",
@@ -42,6 +43,10 @@
             "type": "string"
         },
         "httpsOnly": {
+            "type": "bool",
+            "defaultValue": true
+        },
+        "createXCCores": {
             "type": "bool",
             "defaultValue": true
         }
@@ -79,7 +84,8 @@
                         }
                     ]
                 },
-                "httpsOnly": "[parameters('httpsOnly')]"
+                "httpsOnly": "[parameters('httpsOnly')]",
+                "createXCCores": "[parameters('createXCCores')]"
             },
             "resources": [
                 {
@@ -105,8 +111,8 @@
                         "[concat('Microsoft.Web/Sites/', parameters('siteName'), '/config/web')]"
                     ],
                     "properties": {
-                        "RepoUrl": "https://github.com/jraps20/Solr-AzureAppService",
-                        "branch": "Sitecore",
+                        "RepoUrl": "https://github.com/davidsonone/Solr-AzureAppService",
+                        "branch": "SitecoreXC",
                         "IsManualIntegration": true
                     }
                 }
