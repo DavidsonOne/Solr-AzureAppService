@@ -1,5 +1,6 @@
 Param(
-    $solrVersion
+	$solrVersion,
+	$createXCCores
 )
 
 $solrName = "solr-$solrVersion"
@@ -103,4 +104,28 @@ foreach ($coreName in $xdbCores) {
 
 	New-Item "..\wwwroot\server\solr\$coreName\core.properties"
 	Set-Content "..\wwwroot\server\solr\$coreName\core.properties" "name=$coreName`r`ndataDir=data"
+}
+
+if ($createXCCores == true) {
+	$xcCores = @(
+	"CatalogItemsScope", 
+	"CustomersScope",
+	"OrdersScope"
+)
+
+foreach ($coreName in $xcCores) {
+	Write-Output "Creating $coreName index"
+	New-Item "..\wwwroot\server\solr\" -Name "$coreName" -ItemType "directory"
+	New-Item "..\wwwroot\server\solr\$coreName" -Name "data" -ItemType "directory"
+
+	if($usingDefault){
+		xcopy "..\wwwroot\server\solr\configsets\_default\conf\*" "..\wwwroot\server\solr\$coreName\conf\*" /S /Y
+	}
+	else{
+		xcopy "..\wwwroot\server\solr\configsets\basic_configs\conf\*" "..\wwwroot\server\solr\$coreName\conf\*" /S /Y
+	}
+
+	New-Item "..\wwwroot\server\solr\$coreName\core.properties"
+	Set-Content "..\wwwroot\server\solr\$coreName\core.properties" "name=$coreName`r`ndataDir=data"
+}
 }
