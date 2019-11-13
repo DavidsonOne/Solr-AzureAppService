@@ -106,7 +106,7 @@ foreach ($coreName in $xdbCores) {
 	Set-Content "..\wwwroot\server\solr\$coreName\core.properties" "name=$coreName`r`ndataDir=data"
 }
 
-<if ($solrVersion -like "7.5.0") {
+<if ($solrVersion -like "*7.5.0*") {
 $xcCores = @(
 	"CatalogItemsScope", 
 	"CustomersScope",
