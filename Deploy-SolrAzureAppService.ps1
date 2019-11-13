@@ -118,10 +118,10 @@ $xcCores = @(
 		New-Item "..\wwwroot\server\solr\$coreName" -Name "data" -ItemType "directory"
 	
 		if($usingDefault){
-			xcopy "..\wwwroot\server\solr\configsets\sample_techproducts_configs\conf\*" "..\wwwroot\server\solr\$coreName\conf\*" /S /Y
+			xcopy "..\wwwroot\server\solr\configsets\_default\conf\*" "..\wwwroot\server\solr\$coreName\conf\*" /S /Y
 		}
 		else{
-			xcopy "..\wwwroot\server\solr\configsets\sample_techproducts_configs\conf\*" "..\wwwroot\server\solr\$coreName\conf\*" /S /Y
+			xcopy "..\wwwroot\server\solr\configsets\basic_configs\conf\*" "..\wwwroot\server\solr\$coreName\conf\*" /S /Y
 		}
 	
 		New-Item "..\wwwroot\server\solr\$coreName\core.properties"
